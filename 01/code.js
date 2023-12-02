@@ -3,7 +3,19 @@ const path = require("path");
 const input = readFile(path.join(__dirname, "data.txt"), "utf8");
 const values = input.split("\n");
 
-const parseStringToDigitArray = (value) => {
+const namedNumbers = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9
+};
+
+const stringToValue = (value) => {
   const digitArray = [];
   const digitRegex = /\d/g;
   const digitMatches = value.match(digitRegex);
@@ -12,14 +24,10 @@ const parseStringToDigitArray = (value) => {
       digitArray.push(parseInt(digit));
     });
   }
-  const num = Number(
+  return Number(
     digitArray[0].toString() + digitArray[digitArray.length - 1].toString()
   );
-  console.log(digitArray, num);
-  return num;
 };
 
-const numValues = values.map(parseStringToDigitArray);
-// Calculate the sum of the array
-const sum = numValues.reduce((a, b) => a + b, 0);
+const sum = values.map(stringToValue).reduce((a, b) => a + b, 0);
 console.log(sum);
