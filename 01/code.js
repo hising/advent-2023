@@ -1,7 +1,8 @@
-const readFile = require("fs").readFileSync;
-const path = require("path");
-const input = readFile(path.join(__dirname, "data.txt"), "utf8");
-const values = input.split("\n");
+import path from "path";
+import { getRows } from "../utils/file.js";
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const values = getRows(path.join(__dirname, "data.txt"));
 
 const namedNumbers = {
   one: 1,
